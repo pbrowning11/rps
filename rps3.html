@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RPS3</title>
+</head>
+<body>
+
+    <!-- record user keystroke
+    make user only select RPS
+    make computer only select RPS
+    compare selections
+    print results -->
+
+    <div>
+        <p id="directions">Please press 'r','p', or 's' to play the game!</p>
+        <p id="userSelection"></p>
+        <p id="compSelection"></p>
+        <p id="winTotal"></p>
+        <p id="lossTotal"></p>
+        <p id="tieTotal"></p>
+    </div>
+    
+
+    <script>
+
+        var compOption = ["r", "p", "s"];
+
+        var wins = 0;
+        var losses = 0;
+        var ties = 0;
+
+        var directionsText = document.getElementById("directions");
+        var userSelectionText = document.getElementById("userSelection");
+        var compSelectionText = document.getElementById("compSelection");
+        var winTotalText = document.getElementById("winTotal");
+        var lossTotalText = document.getElementById("lossTotal");
+        var tieTotalText = document.getElementById("tieTotal");
+        
+        document.onkeydown = function() {
+            var userGuess = event.key;
+                console.log(userGuess);
+
+            var compGuess = compOption[Math.floor(Math.random()*compOption.length)];
+                console.log(compGuess);
+
+            if ((userGuess === "r") || (userGuess === "p") || (userGuess === "s")) {
+                if ((userGuess === "r") && (compGuess === "s")) {
+                    wins++
+                }
+                if ((userGuess === "p") && (compGuess === "r")) {
+                    wins++
+                }
+                if ((userGuess === "s") && (compGuess === "p")) {
+                    wins++
+                }
+                if ((userGuess === "r") && (compGuess === "p")) {
+                    losses++
+                }
+                if ((userGuess === "p") && (compGuess === "s")) {
+                    losses++
+                }
+                if ((userGuess === "s") && (compGuess === "r")) {
+                    losses++
+                }
+                if ((userGuess === compGuess)) {
+                    ties++
+                }
+            } else {
+                alert("Please press 'r','p,'or's'")
+            }
+
+            directionsText.textContent = "";
+            userSelectionText.textContent = "You selected: " + userGuess;
+            compSelectionText.textContent = "Computer selected: " + compGuess;
+            winTotalText.textContent = "Total number of wins: " + wins;
+            lossTotalText.textContent = "Total number of losses: " + losses;
+            tieTotalText.textContent = "Total number of ties: " + ties;
+        }
+
+
+    </script>
+</body>
+</html>
